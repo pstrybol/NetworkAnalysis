@@ -1,0 +1,5 @@
+.idea/
+build/
+environment.yml
+NetworkAnalysis.egg-info/
+NetworkAnalysis/__pychache__/
