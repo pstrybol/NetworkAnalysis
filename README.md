@@ -10,7 +10,7 @@ NetworkAnalysis provides a python-based graph handling framework with a **focus 
 
 - <u>Network Representaiton Learning (NRL) evaluation</u>: Basic NRL methods are avaiable through OpenNE and include but are not limited to DeepWalk, Node2Vec and LINE. After the representations are learned these can be plotted, clustered or written to csv files. 
 
-- <u>Embedding visualization </u>: To evaluate the quality of the learned embeddings, be it from within the NetworkAnalysis framework or from any other embedding method, NetworkAnalysis offers the functionality to manipulate and visualize embddings as the user sees fit. For example, the embeddings can be clustered and checked against original labels using the Adjusted Mutual Information (AMI)  metric and subsequently visualized.
+<!-- - <u>Embedding visualization </u>: To evaluate the quality of the learned embeddings, be it from within the NetworkAnalysis framework or from any other embedding method, NetworkAnalysis offers the functionality to manipulate and visualize embddings as the user sees fit. For example, the embeddings can be clustered and checked against original labels using the Adjusted Mutual Information (AMI)  metric and subsequently visualized. -->
 
 Other functionalities such as handling of directed and heterogeneous graphs will be added in future updates. 
 

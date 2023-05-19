@@ -691,7 +691,8 @@ class UndirectedInteractionNetwork(Graph):
                            nu2=1e-4, bs=200, encoder_list='[1000, 128]'):
 
         try:
-            from openne import gf, hope, lap, line, node2vec, sdne, grarep, graph
+            # from openne import gf, hope, lap, line, node2vec, sdne, grarep, graph
+            from openne import lap, node2vec, grarep, graph # Don't require tensorflow
 
         except ImportError:
             raise ImportError("Please install openNE to use this function.")
@@ -749,9 +750,9 @@ class UndirectedInteractionNetwork(Graph):
         if save is not None:
             print("Saving embeddings...")
             model.save_embeddings(save)
-            tf.compat.v1.reset_default_graph()
+            # tf.compat.v1.reset_default_graph() # Only necessary for methods that require TF
         else:
-            tf.compat.v1.reset_default_graph()
+            # tf.compat.v1.reset_default_graph()
 
             return model.vectors  # TODO: this is dangerous, if the user changes the embedding they will also change the class attribute => is this better?
 

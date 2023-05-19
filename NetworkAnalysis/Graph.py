@@ -1035,6 +1035,8 @@ class Graph:
             node_colors = list(map(''.join, zip(*node_colors)))
             node_colors = [i if i else color_scheme_nodes[0] for i in node_colors]
             # node_colors = [color_scheme_nodes[1] if node in gene_list else color_scheme_nodes[0] for node in G.nodes]
+        elif isinstance(node_colors, dict):
+            node_colors = [node_colors[i] for i in G.nodes]
 
         # assert len(G.nodes) == len(node_colors), "ERROR number of node colors does not match size of graph"
 
