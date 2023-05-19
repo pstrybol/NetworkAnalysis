@@ -36,5 +36,3 @@ The `examples/` folder contains various jupter notebooks to assist in the usage 
 
 Any suggestions or contributions to improving NetworkAnalysis are greatly appreciated. Feel free open issues tagged with the appropriate label ("feature request", "bug", etc.). Alternatively you can email me directly with feedback/suggestions at: pieterpaul.strybol@ugent.be
 
-# License
-
