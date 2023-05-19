@@ -1,34 +1,40 @@
-# NetworkAnalysis: A Python library for basic graph handling, edge sampling and representation learning.
-![Coverage](./pytests/Coverage/coverage.svg)
+# NetworkAnalysis: A Python framework for graph handling
+<!-- ![Coverage](./pytests/Coverage/coverage.svg) -->
 
-# About NetworkAnalysis
+# About 
 
+NetworkAnalysis provides a python-based graph handling framework with a **focus biomedical graphs** capable of:
+- <u>Graph initialization and handling</u>: removing disconnected components, adding custom node-to-integer mappings, removing self-loops and duplicate interactions, custom node types, obtain N-order neighbours, find communities using Louvain algorithm, clustering, and much more.
 
-- Graph initialization: Similar to the standard graph handling framework NetworkX, NetworkAnalysis offers additional functionality of removing disconnected components, adding custom node-to-integer mappings, removing self-loops and duplicate interactions, and specifying custom node types. 
+- <u>Edge Sampling</u>e: NetworkAnalysis offer a high level of granularity when it comes to edge sampling for Link Prediction. The user can choose between balanced, unbalanced or graph distance-based sampling strategies. Additionally, specific sets of interactions that are to be included or excluded in the train/test sets can be added. 
 
-- Edge Sampling: This is the main functionality of the package and offers a high level of granularity for edge sampling. The user can choose between balanced or unbalanced sampling, add specific sets of interactions that are to be included or excluded from the negative set. Also, the sampling algorithm is extendable to heterogeneous graphs where it will sample each edge type separately with, if desired, a separate negative to positive ratio and separate training/validation/testing ratio.
+- <u>Network Representaiton Learning (NRL) evaluation</u>: Basic NRL methods are avaiable through OpenNE and include but are not limited to DeepWalk, Node2Vec and LINE. After the representations are learned these can be plotted, clustered or written to csv files. 
 
-- NRL evaluation: Basic Network Representation Learning (NRL) methods are avaiable through OpenNE and include but are not limited to DeepWalk, Node2Vec and LINE.
+- <u>Embedding visualization </u>: To evaluate the quality of the learned embeddings, be it from within the NetworkAnalysis framework or from any other embedding method, NetworkAnalysis offers the functionality to manipulate and visualize embddings as the user sees fit. For example, the embeddings can be clustered and checked against original labels using the Adjusted Mutual Information (AMI)  metric and subsequently visualized.
 
-- Embedding visualization: To evaluate the quality of the learned embeddings, be it from within the NetworkAnalysis framework or from any other embedding method, NetworkAnalysis offers the functionality to manipulate and visualize embddings as the user sees fit. For example, the embeddings can be clustered and checked against original labels using the Adjusted Mutual Information (AMI)  metric and subsequently visualized.
+Other functionalities such as handling of directed and heterogeneous graphs will be added in future updates. 
+
+NetworkAnalysis functionalities have been tested through the appropriate pytests.
 
 # Installation
 
 NetworkAnalysis is tested on Python 3.10
 
-**Option 1:** Through pip install
-` pip install NetworkAnalysis`
+**Option 1:** Cloning this repository
+```
+git clone git@github.com:pstrybol/NetworkAnalysis.git
+python setup.py install
+```
 
-**Option 2:** Cloning this repository
+**Option 2:** Through pip install -> TBA
 
 # Usage
 
-
-## Command Line Interface
-
-## NetworkAnalysis as API
+The `examples/` folder contains various jupter notebooks to assist in the usage of NetworkAnalysis functionalities. For now, NetworkAnalysis is offered solely as an API yet Command Line Interface (CLI) will be added in a future update.
 
 # Contributing
+
+Any suggestions or contributions to improving NetworkAnalysis are greatly appreciated. Feel free open issues tagged with the appropriate label ("feature request", "bug", etc.). Alternatively you can email me directly with feedback/suggestions at: pieterpaul.strybol@ugent.be
 
 # License
 
