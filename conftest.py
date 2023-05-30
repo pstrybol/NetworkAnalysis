@@ -1,7 +1,6 @@
 from NetworkAnalysis.Graph import Graph
-# from NetworkAnalysis.DirectedInteractionNetwork import DirectedInteractionNetwork
 from NetworkAnalysis.UndirectedInteractionNetwork import UndirectedInteractionNetwork
-# from NetworkAnalysis.MultiGraph import MultiGraph
+from NetworkAnalysis.MultiGraph import MultiGraph
 import networkx as nx
 import pandas as pd
 import numpy as np
@@ -160,32 +159,32 @@ def combined_undirobjects_brain():
     return combined_undir_objects
 
 
-# @pytest.fixture(scope='module')
-# def small_multigraph(network_chain_4):
-#     edges = [('G0', 'G1'), ('G1', 'G3'), ('G2', 'G3'), ('G5', 'G4'), ('G3', 'G4')]
-#     network = pd.DataFrame(np.array(edges), columns=['GA', 'GB'])
-#     undir = UndirectedInteractionNetwork(network)
+@pytest.fixture(scope='module')
+def small_multigraph(network_chain_4):
+    edges = [('G0', 'G1'), ('G1', 'G3'), ('G2', 'G3'), ('G5', 'G4'), ('G3', 'G4')]
+    network = pd.DataFrame(np.array(edges), columns=['GA', 'GB'])
+    undir = UndirectedInteractionNetwork(network)
 
-#     return MultiGraph(graph_dict={"chain": network_chain_4, "random": undir})
+    return MultiGraph(graph_dict={"chain": network_chain_4, "random": undir})
 
 
-# @pytest.fixture(scope='module')
-# def small_heterogeneous_multigraph(network_chain_4):
-#     # Dependency
-#     edges_dep = [('C0', 'G1'),  ('C0', 'G3'), ('C0', 'G5'), ('C1', 'G4'), ('C1', 'G2'), ('C0', 'G2')]
-#     network_dep = pd.DataFrame(np.array(edges_dep), columns=['GA', 'GB'])
+@pytest.fixture(scope='module')
+def small_heterogeneous_multigraph(network_chain_4):
+    # Dependency
+    edges_dep = [('C0', 'G1'),  ('C0', 'G3'), ('C0', 'G5'), ('C1', 'G4'), ('C1', 'G2'), ('C0', 'G2')]
+    network_dep = pd.DataFrame(np.array(edges_dep), columns=['GA', 'GB'])
 
-#     # Co expression
-#     edges_coexp = [('G0', 'G1'), ('G0', 'G3'), ('G1', 'G3'), ('G3', 'G4'), ('G4', 'G6')]
-#     network_coexp = pd.DataFrame(np.array(edges_coexp), columns=['GA', 'GB'])
+    # Co expression
+    edges_coexp = [('G0', 'G1'), ('G0', 'G3'), ('G1', 'G3'), ('G3', 'G4'), ('G4', 'G6')]
+    network_coexp = pd.DataFrame(np.array(edges_coexp), columns=['GA', 'GB'])
 
-#     node_types = {"G" + str(i): "gene" for i in range(7)}
-#     node_types["C0"] = "cell line"
-#     node_types["C1"] = "cell line"
+    node_types = {"G" + str(i): "gene" for i in range(7)}
+    node_types["C0"] = "cell line"
+    node_types["C1"] = "cell line"
 
-#     return MultiGraph(graph_dict={"Interaction": network_chain_4, "dependency": network_dep,
-#                                   "co_expression": network_coexp},
-#                       node_types=node_types)
+    return MultiGraph(graph_dict={"Interaction": network_chain_4, "dependency": network_dep,
+                                  "co_expression": network_coexp},
+                      node_types=node_types)
 
 
 @pytest.fixture(scope='module')

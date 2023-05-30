@@ -109,7 +109,7 @@ class UndirectedInteractionNetwork(Graph):
     def mergeNetworks(self, network):
         new_dict = {**self.node_type_names, **network.node_type_names}
         return UndirectedInteractionNetwork(pd.concat([self.getInteractionNamed(), network.getInteractionNamed()],
-                                                      axis=0, ignore_index=True),
+                                                    axis=0, ignore_index=True),
                                             node_types=new_dict)
 
     def subsample(self, n=100, weighted=False):
