@@ -226,13 +226,15 @@ class Graph:
         return list(zip(df.Gene_A.values, df.Gene_B.values))
 
     def set_node_types(self, node_types):
-        if isinstance(node_types, dict):
+        if not isinstance(node_types, dict):
+            raise IOError("The node_types are not understood, "
+                        "please provide a dict mapping each node on their node type.")
+    
+        if isinstance(list(node_types.keys())[0], int):
+            self.node_types = check_node_dict(self.nodes, node_types, type_dict="node_types")
+        else:
             node_type_names = check_node_dict(self.node_names, node_types, type_dict="node_types")
             self.node_types = {self.gene2int[k]: v for k, v in node_type_names.items()}
-
-        else:
-            raise IOError("The node_types are not understood, "
-                          "please provide a dict mapping each node on their node type.")
 
     def get_node_type_subnet(self, type, inplace=False):
         """
