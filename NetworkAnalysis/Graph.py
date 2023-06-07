@@ -59,7 +59,7 @@ class Graph:
 
 
     @classmethod
-    def from_ndex(cls, ndex_id, keeplargestcomponent):
+    def from_ndex(cls, ndex_id, keeplargestcomponent, attributes_for_names=None, node_type=str):
 
         client = ndex2.client.Ndex2()
         client_resp = client.get_network_as_cx_stream(ndex_id)
@@ -69,7 +69,11 @@ class Graph:
         print('Number of nodes: ' + str(len(list(net_cx.get_nodes()))))
         print('Number of nodes: ' + str(len(list(net_cx.get_edges()))))
 
-        return cls(net_cx.to_pandas_dataframe().drop("interaction", axis=1), keeplargestcomponent=keeplargestcomponent)
+        net_pd = net_cx.to_pandas_dataframe().drop("interaction", axis=1).astype(node_type)
+        if attributes_for_names is not None:
+            net_pd = net_pd.applymap(lambda x: net_cx.nodeAttributes[x][0][attributes_for_names])
+
+        return cls(net_pd, keeplargestcomponent=keeplargestcomponent)
 
     def __init__(self, interaction_df, colnames=None, verbose=True, keeplargestcomponent=False,
                  allow_self_connected=False, node_types=None, drop_duplicates=True,

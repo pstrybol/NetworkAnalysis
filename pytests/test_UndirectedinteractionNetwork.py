@@ -770,4 +770,6 @@ def test_ndex2_graph_init():
                                    keeplargestcomponent=True)
     
     ndex_example_large = UndirectedInteractionNetwork.from_ndex(ndex_id='c3554b4e-8c81-11ed-a157-005056ae23aa',
-                                   keeplargestcomponent=False)
+                                   keeplargestcomponent=False, 
+                                   attributes_for_names='v', node_type=int)
+    
