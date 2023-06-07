@@ -1,16 +1,17 @@
-import pandas as pd
-import numpy as np
-from scipy.linalg import expm
-import networkx as nx
-import warnings
-import copy
-import matplotlib.pyplot as plt
-from collections import defaultdict
-import time
-from networkx.exception import NetworkXError, AmbiguousSolution
 from sklearn.linear_model import LogisticRegression, SGDClassifier
+from networkx.exception import NetworkXError, AmbiguousSolution
 from sklearn.ensemble import RandomForestClassifier
 from joblib import Parallel, delayed
+from collections import defaultdict
+from scipy.linalg import expm
+import matplotlib.pyplot as plt
+import networkx as nx
+import pandas as pd
+import numpy as np
+import warnings
+import copy
+import time
+import types
 
 # complete the class specific functions in Directed networks
 
@@ -440,10 +441,6 @@ class Graph:
                         df.Gene_B.isin(nodes)]
 
         return df
-
-    '''
-        merge networks
-    '''
 
     def makeSelfConnected(self, inplace=False):
         self_df = pd.DataFrame({'Gene_A': self.node_names, 'Gene_B': self.node_names})
@@ -1879,3 +1876,38 @@ def check_node_dict(net_node_names, node_dict, type_dict=""):
         return {k: v for k, v in node_dict.items() if k not in nodes_missing_in_network}
     else:
         return node_dict
+
+
+def checkInputDict(input, allowed_type, modelnames, inputname, allowed_type_name='', custom=False):
+    '''
+    Checks if an input is dict consisting of values of allowed_type and keys equal to modelnames,
+    else if the input is a scalar, it is converted to a dict, where all the keys are modelnames,
+    all of which map to input.
+    :param input: a dict or an object of allowed_type
+    :param allowed_type: The allowed type() for an instance of input (when a dict), or input dict (when a scalar)
+    :param modelnames: keys of the new dict when input is a scalar
+    :param inputname: a string speficying the name of the input, used for more informative errors
+    :param allowed_type_name:
+    :param custom: a boolean indicating whether input is a custom function
+    :return: a dictionary, all elements of which belong to allowed_type and keys are given by modelnames
+    '''
+
+    if isinstance(input, types.FunctionType) or custom:
+        # return {modelname_: input for modelname_ in modelnames}
+        return input
+
+    elif isinstance(input, dict):
+        assert set(list(input.keys())) == set(modelnames), \
+            'The modelnames of ' + inputname + ' are not consistent with the model'
+
+        bools = [isinstance(v, allowed_type) for model, v in input.items()]
+
+        assert sum(bools) == len(bools), \
+            'The types of ' + inputname + ' are not all ' + allowed_type_name
+
+        return input
+    elif isinstance(input, allowed_type):
+        return {modelname_: input for modelname_ in modelnames}
+    else:
+        raise IOError('The input ' + inputname + ' should be a dictionary or a ' + allowed_type_name \
+                      + ", while it is a " + str(type(input)))
