@@ -136,8 +136,13 @@ class MultiGraph(Graph):
         df = self.edge_counts
         return df.loc[df.type > 1]
 
-    def set_node_types(self, node_types):
-        self.node_types = node_types
+    # def set_node_types(self, node_types, mode='int'):
+    #     if mode == 'int':
+    #         self.node_types = node_types
+    #         self.node_type_names = {self.int2gene[k]: v for k, v in self.node_types}
+    #     elif mode == 'str':
+    #         self.node_type_names = node_types
+    #         self.node_types = {self.gene2int[k]: v for k, v in self.node_type_names}
 
     def interactions_as_set(self, return_names=True):
         if return_names:

@@ -246,6 +246,9 @@ def test_getTrainTestData(small_multigraph):
     X_train, X_val, X_test, Y_train, Y_val, Y_test = small_multigraph.getTrainTestData()
     all_asserts_X_undir(X_train, X_val, X_test, Y_train, Y_val, Y_test, small_multigraph)
 
+    X_train, X_val, X_test, Y_train, Y_val, Y_test = small_multigraph.getTrainTestData(train_validation_ratio=0.2)
+    all_asserts_X_undir(X_train, X_val, X_test, Y_train, Y_val, Y_test, small_multigraph)
+
 
 def test_gene2int_init(small_heterogeneous_multigraph):
     gene2int = small_heterogeneous_multigraph.gene2int

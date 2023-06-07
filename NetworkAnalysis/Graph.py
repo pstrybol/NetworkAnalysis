@@ -127,7 +127,7 @@ class Graph:
             self.node_types = {i: "node" for i in self.nodes}
 
         elif isinstance(node_types, dict):
-            if isinstance(list(node_types.keys())[0], int):
+            if isinstance(list(node_types.keys())[0], int)  or isinstance(list(node_types.keys())[0], np.int64):
                 self.node_types = check_node_dict(self.nodes, node_types, type_dict="node_types")
             else:
                 node_type_names = check_node_dict(self.node_names, node_types, type_dict="node_types")
@@ -230,7 +230,7 @@ class Graph:
             raise IOError("The node_types are not understood, "
                         "please provide a dict mapping each node on their node type.")
     
-        if isinstance(list(node_types.keys())[0], int):
+        if isinstance(list(node_types.keys())[0], int) or isinstance(list(node_types.keys())[0], np.int64):
             self.node_types = check_node_dict(self.nodes, node_types, type_dict="node_types")
         else:
             node_type_names = check_node_dict(self.node_names, node_types, type_dict="node_types")
