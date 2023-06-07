@@ -3,7 +3,7 @@
 
 # About 
 
-NetworkAnalysis provides a python-based graph handling framework with a **focus biomedical graphs** capable of:
+NetworkAnalysis provides a python-based graph handling framework with a **focus biomedical graphs** capable of handling undirected heterogeneous graphs:
 - <u>Graph initialization and handling</u>: removing disconnected components, adding custom node-to-integer mappings, removing self-loops and duplicate interactions, custom node types, obtain N-order neighbours, find communities using Louvain algorithm, clustering, and much more.
 
 - <u>Edge Sampling</u>e: NetworkAnalysis offer a high level of granularity when it comes to edge sampling for Link Prediction. The user can choose between balanced, unbalanced or graph distance-based sampling strategies. Additionally, specific sets of interactions that are to be included or excluded in the train/test sets can be added. 
@@ -12,7 +12,7 @@ NetworkAnalysis provides a python-based graph handling framework with a **focus 
 
 <!-- - <u>Embedding visualization </u>: To evaluate the quality of the learned embeddings, be it from within the NetworkAnalysis framework or from any other embedding method, NetworkAnalysis offers the functionality to manipulate and visualize embddings as the user sees fit. For example, the embeddings can be clustered and checked against original labels using the Adjusted Mutual Information (AMI)  metric and subsequently visualized. -->
 
-Other functionalities such as handling of directed and heterogeneous graphs will be added in future updates. 
+Other functionalities such as handling of directed graphs will be added in future updates. 
 
 NetworkAnalysis functionalities have been tested through the appropriate pytests.
 
