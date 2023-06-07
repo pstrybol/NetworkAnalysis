@@ -12,6 +12,8 @@ import warnings
 import copy
 import time
 import types
+import ndex2
+import json
 
 # complete the class specific functions in Directed networks
 
@@ -54,6 +56,20 @@ class Graph:
                           'Please specify kegg, biogrid or reactome, or enter None for custom network type.')
 
         return cls(network_df, keeplargestcomponent=keeplargestcomponent)
+
+
+    @classmethod
+    def from_ndex(cls, ndex_id, keeplargestcomponent):
+
+        client = ndex2.client.Ndex2()
+        client_resp = client.get_network_as_cx_stream(ndex_id)
+        net_cx = ndex2.create_nice_cx_from_raw_cx(json.loads(client_resp.content))
+        
+        print('Name: ' + net_cx.get_name())
+        print('Number of nodes: ' + str(len(list(net_cx.get_nodes()))))
+        print('Number of nodes: ' + str(len(list(net_cx.get_edges()))))
+
+        return cls(net_cx.to_pandas_dataframe().drop("interaction", axis=1), keeplargestcomponent=keeplargestcomponent)
 
     def __init__(self, interaction_df, colnames=None, verbose=True, keeplargestcomponent=False,
                  allow_self_connected=False, node_types=None, drop_duplicates=True,

@@ -760,3 +760,14 @@ def test_sample_positives_and_negatives(karate_club):
         "getTrainTestPairs_MStree: overlap negatives train - test"
 
     assert len(set(list(map(tuple, all_neg)))) == len(all_neg)
+
+
+def test_ndex2_graph_init():
+    ndex_example = UndirectedInteractionNetwork.from_ndex(ndex_id='4fde0a71-c571-11eb-9a85-0ac135e8bacf',
+                                   keeplargestcomponent=False)
+    
+    ndex_example_lcc = UndirectedInteractionNetwork.from_ndex(ndex_id='4fde0a71-c571-11eb-9a85-0ac135e8bacf',
+                                   keeplargestcomponent=True)
+    
+    ndex_example_large = UndirectedInteractionNetwork.from_ndex(ndex_id='c3554b4e-8c81-11ed-a157-005056ae23aa',
+                                   keeplargestcomponent=False)
