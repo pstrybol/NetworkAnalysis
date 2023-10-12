@@ -28,7 +28,7 @@ class UndirectedInteractionNetwork(Graph):
     Class tp represent an undirected network and inherits from the base class Graph.
     """
     def __init__(self, interaction_df, colnames=None, verbose=True, keeplargestcomponent=False,
-                 allow_self_connected=False, node_types=None, gene2int=None):
+                 allow_self_connected=False, node_types=None, gene2int=None, sort_rows=True):
         """
 
         Args:
@@ -43,8 +43,9 @@ class UndirectedInteractionNetwork(Graph):
         super().__init__(interaction_df, colnames, verbose=False, keeplargestcomponent=keeplargestcomponent,
                          allow_self_connected=allow_self_connected, gene2int=gene2int, node_types=node_types)
 
-        self.interactions.values.sort(axis=1)
-        self.interactions = self.interactions.drop_duplicates(['Gene_A', 'Gene_B'])
+        if sort_rows:
+            self.interactions.values.sort(axis=1)
+            self.interactions = self.interactions.drop_duplicates(['Gene_A', 'Gene_B'])
 
         if verbose:
             print('%d Nodes and %d interactions' % (len(self.nodes), self.interactions.shape[0]))
@@ -592,7 +593,7 @@ class UndirectedInteractionNetwork(Graph):
                 if include_negatives is not None:
                     candidates = include_negatives[gene] if isinstance(include_negatives[gene], list) else list(include_negatives[gene])
                 else:
-                    candidates = np.random.choice(self.N_nodes, draws, replace=False)
+                    candidates = np.random.choice(self.N_nodes, np.int(draws), replace=False)
 
                 not_considered = neighbors + [gene] + done + zeros # don't include the zeros here bc these have been seen enough times as a negative
                 negatives = np.setdiff1d(np.array(candidates, dtype=int), np.array(not_considered, dtype=int))
